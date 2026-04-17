@@ -424,6 +424,39 @@ body {
 }
 .footer-social a.ig:hover { color: #E1306C; border-color: rgba(225,48,108,.6); background: rgba(225,48,108,.1); }
 .footer-social a.wa:hover { color: #25D366; border-color: rgba(37,211,102,.6); background: rgba(37,211,102,.1); }
+/* QR CODE (footer) */
+.footer-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 16px;
+}
+.footer-qr-img {
+  width: 110px;
+  height: 110px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+}
+.footer-qr-img canvas,
+.footer-qr-img img,
+.footer-qr-img svg {
+  display: block;
+  width: 110px !important;
+  height: 110px !important;
+}
+.footer-qr-label {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--dim);
+  text-transform: uppercase;
+}
 </style>
 </head>
 <body>
@@ -1323,6 +1356,12 @@ body {
       <i class="fa-brands fa-whatsapp"></i>
     </a>
   </div>
+  <div class="footer-qr">
+    <a href="https://datadealeroficial.github.io/resumo_executivo/" target="_blank" rel="noopener" aria-label="Abrir resumo executivo">
+      <div id="footer-qr-code" class="footer-qr-img" aria-label="QR Code para o resumo executivo"></div>
+    </a>
+    <span class="footer-qr-label">Aponte a câmera</span>
+  </div>
   <div class="footer-logo">
     <span style="color:#444">data</span><span style="color:rgba(163,230,53,.3)">dealer</span><sup style="font-size:6px;color:#333">®</sup>
   </div>
@@ -1352,6 +1391,21 @@ body {
   // Default: ativa a aba marcada como 'active' no HTML (Vendas)
   const abaAtiva = document.querySelector('.tab.active');
   aplicarFiltro(abaAtiva ? abaAtiva.dataset.filter : 'vendas');
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('footer-qr-code');
+  if (!el || typeof QRCode === 'undefined') return;
+  new QRCode(el, {
+    text: 'https://datadealeroficial.github.io/resumo_executivo/',
+    width: 110,
+    height: 110,
+    colorDark: '#000000',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
 })();
 </script>
 </body>
