@@ -3,1410 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Grupo Dinisa — Resumo Executivo</title>
+<title>Data Dealer — Resumo Executivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root {
-  --neon: #a3e635;
-  --neon-dim: rgba(163,230,53,.15);
-  --neon-glow: rgba(163,230,53,.4);
-  --dark: #0a0a0a;
-  --card: #131313;
-  --card-border: #1e1e1e;
-  --text: #e0e0e0;
-  --dim: #777;
-  --red: #ef4444;
-  --amber: #f59e0b;
-  --blue: #3b82f6;
-  --cyan: #22d3ee;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--dark);
-  color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
-  max-width: 480px;
-  margin: 0 auto;
-  min-height: 100vh;
-}
-/* HEADER */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(10,10,10,.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--card-border);
-  padding: 12px 16px 0;
-}
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.logo-icon {
-  width: 28px;
-  height: 28px;
-  background: var(--neon);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.logo-icon i { color: #000; font-size: 13px; }
-.logo-text { font-size: 15px; font-weight: 700; letter-spacing: -.3px; }
-.logo-data { color: #fff; }
-.logo-dealer { color: var(--neon); }
-.logo-text sup { font-size: 7px; color: var(--dim); vertical-align: super; }
-.empresa-nome { font-size: 15px; font-weight: 700; letter-spacing: -.3px; text-transform: uppercase; }
-.empresa-nome .e-pre { color: #fff; }
-.empresa-nome .e-accent { color: var(--neon); }
-.header-date {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  color: var(--dim);
-}
-.live-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--neon);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; box-shadow: 0 0 0 0 var(--neon-glow); }
-  50% { opacity:.7; box-shadow: 0 0 0 4px transparent; }
-}
-.header-sub {
-  font-size: 9px;
-  color: var(--dim);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  margin-top: 2px;
-}
-/* TABS */
-.tabs {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.tabs::-webkit-scrollbar { display: none; }
-.tab {
-  flex-shrink: 0;
-  padding: 8px 14px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--dim);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all .2s;
-  white-space: nowrap;
-  letter-spacing: .3px;
-}
-.tab.active {
-  color: var(--neon);
-  border-bottom: 2px solid var(--neon);
-}
-/* CONTENT */
-.content { padding: 14px 14px 40px; }
-.section { display: none; }
-.section.visible { display: block; }
-/* SECTION LABEL */
-.section-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin: 16px 0 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, var(--card-border), transparent);
-}
-/* HIGHLIGHT CARD */
-.hl-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 10px;
-  border-left: 3px solid var(--neon);
-}
-.hl-card.warn { border-left-color: var(--amber); }
-.hl-card.danger { border-left-color: var(--red); }
-.hl-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-bottom: 6px;
-}
-.hl-value {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--neon);
-  line-height: 1;
-  margin-bottom: 5px;
-}
-.hl-sub {
-  font-size: 11px;
-  color: var(--dim);
-}
-/* CARD */
-.card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-}
-.card-title {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-bottom: 10px;
-}
-.metric-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-}
-.metric-row:last-child { border-bottom: none; }
-.metric-label {
-  font-size: 12px;
-  color: var(--dim);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.metric-value {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 600;
-}
-.mv-neon { color: var(--neon); }
-.mv-red { color: var(--red); }
-.mv-amber { color: var(--amber); }
-.mv-blue { color: var(--blue); }
-.mv-cyan { color: var(--cyan); }
-/* MARCA GRID */
-.marca-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.marca-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 11px 12px;
-}
-.marca-name {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--neon);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-.marca-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  padding: 2px 0;
-}
-.marca-row span:first-child { color: var(--dim); }
-.marca-row span:last-child {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 600;
-  color: var(--text);
-}
-/* AGEING GRID */
-.ageing-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.ageing-item {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 10px 12px;
-}
-.ageing-item.total {
-  grid-column: 1 / -1;
-  border-color: var(--neon-dim);
-}
-.ageing-item.danger-item { border-color: rgba(239,68,68,.3); }
-.ageing-item.warn-item { border-color: rgba(245,158,11,.3); }
-.ageing-label {
-  font-size: 9px;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  margin-bottom: 4px;
-}
-.ageing-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-}
-.ageing-val.neon { color: var(--neon); }
-.ageing-val.amber { color: var(--amber); }
-.ageing-val.red { color: var(--red); }
-/* LUCRO GRID */
-.lucro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.lucro-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 10px 10px;
-  text-align: center;
-}
-.lucro-mes {
-  font-size: 9px;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  margin-bottom: 5px;
-}
-.lucro-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-}
-.lucro-pos { color: var(--neon); }
-.lucro-neg { color: var(--red); }
-/* PROGRESS BAR */
-.prog-wrap { margin: 4px 0 8px; }
-.prog-bar {
-  height: 5px;
-  background: rgba(255,255,255,.07);
-  border-radius: 99px;
-  overflow: hidden;
-}
-.prog-fill {
-  height: 100%;
-  background: var(--neon);
-  border-radius: 99px;
-  transition: width .5s;
-}
-.prog-fill.red { background: var(--red); }
-.prog-fill.amber { background: var(--amber); }
-.prog-fill.blue { background: var(--blue); }
-/* DIVIDER */
-.divider {
-  height: 1px;
-  background: var(--card-border);
-  margin: 12px 0;
-}
-/* MINI STAT ROW */
-.mini-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.mini-stat {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 10px 12px;
-}
-.mini-stat-label {
-  font-size: 9px;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  margin-bottom: 4px;
-}
-.mini-stat-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--neon);
-}
-/* DRE TABLE */
-.dre-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  font-size: 11px;
-}
-.dre-row:last-child { border-bottom: none; }
-.dre-label { color: var(--dim); flex: 1; }
-.dre-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 600;
-  font-size: 11px;
-}
-/* FOOTER */
-.footer {
-  text-align: center;
-  padding: 24px 16px;
-  font-size: 9px;
-  color: #333;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border-top: 1px solid var(--card-border);
-  margin-top: 8px;
-}
-.footer-logo { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
-/* LOJA TABLE */
-.loja-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 7px 0;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  font-size: 11px;
-}
-.loja-row:last-child { border-bottom: none; }
-.loja-name { color: var(--text); font-weight: 500; }
-.loja-vals { display: flex; gap: 10px; }
-/* SOCIAL ICONS (footer) */
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-.footer-social a {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--dim);
-  font-size: 15px;
-  text-decoration: none;
-  transition: all .25s;
-}
-.footer-social a:hover {
-  color: var(--neon);
-  border-color: var(--neon);
-  background: var(--neon-dim);
-  transform: translateY(-2px);
-}
-.footer-social a.ig:hover { color: #E1306C; border-color: rgba(225,48,108,.6); background: rgba(225,48,108,.1); }
-.footer-social a.wa:hover { color: #25D366; border-color: rgba(37,211,102,.6); background: rgba(37,211,102,.1); }
-/* QR CODE (footer) */
-.footer-qr {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin: 4px 0 16px;
-}
-.footer-qr-img {
-  width: 110px;
-  height: 110px;
-  padding: 8px;
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid var(--card-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: content-box;
-}
-.footer-qr-img canvas,
-.footer-qr-img img,
-.footer-qr-img svg {
-  display: block;
-  width: 110px !important;
-  height: 110px !important;
-}
-.footer-qr-label {
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  color: var(--dim);
-  text-transform: uppercase;
-}
+:root{--neon:#a3e635;--neon-dim:rgba(163,230,53,.15);--neon-glow:rgba(163,230,53,.4);--dark:#0a0a0a;--card:#131313;--card-border:#1e1e1e;--text:#e0e0e0;--dim:#777;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--cyan:#22d3ee}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:480px;margin:0 auto;padding:0 0 40px}
+.header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:14px 16px 0;border-bottom:1px solid var(--card-border)}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-data{color:#fff;font-weight:700;font-size:15px;letter-spacing:-.5px}
+.logo-dealer{color:var(--neon);font-weight:700;font-size:15px;letter-spacing:-.5px}
+.logo sup{font-size:7px;color:var(--dim);vertical-align:super}
+.header-date{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace}
+.live-dot{width:7px;height:7px;background:var(--neon);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--neon-glow)}50%{box-shadow:0 0 0 6px transparent}}
+.header-sub{font-size:9px;color:var(--dim);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.tabs{display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 14px;font-size:11px;font-weight:600;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.5px;white-space:nowrap;text-transform:uppercase}
+.tab.active{color:var(--neon);border-bottom-color:var(--neon)}
+.tab:hover{color:var(--text)}
+.section{display:none;padding:16px}
+.section.visible{display:block}
+.section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:18px 0 12px;font-weight:600;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--card-border),transparent)}
+.hl-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:16px;margin-bottom:10px;text-align:center;position:relative;overflow:hidden}
+.hl-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--neon-glow),transparent)}
+.hl-card.warn{border-color:var(--amber)}.hl-card.warn::before{background:linear-gradient(90deg,transparent,rgba(245,158,11,.4),transparent)}
+.hl-card.danger{border-color:var(--red)}.hl-card.danger::before{background:linear-gradient(90deg,transparent,rgba(239,68,68,.4),transparent)}
+.hl-label{font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
+.hl-value{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--neon)}
+.hl-value .unit{font-size:16px;font-weight:500}
+.hl-sub{font-size:11px;color:var(--dim);margin-top:4px;font-family:'JetBrains Mono',monospace}
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.card-title{font-size:11px;font-weight:600;margin-bottom:10px;color:var(--text)}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px}
+.metric-label i{font-size:10px}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
+.mv-neon{color:var(--neon)}.mv-red{color:var(--red)}.mv-amber{color:var(--amber)}.mv-blue{color:var(--blue)}.mv-cyan{color:var(--cyan)}
+.marca-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.marca-card{background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:12px}
+.marca-name{font-size:12px;font-weight:700;color:var(--neon);margin-bottom:8px;letter-spacing:1px}
+.marca-row{display:flex;justify-content:space-between;font-size:10px;padding:3px 0}
+.marca-row span:first-child{color:var(--dim)}
+.marca-row span:last-child{font-family:'JetBrains Mono',monospace;color:var(--text);font-weight:500}
+.top-model-card{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:14px;margin-bottom:10px}
+.top-model-icon{font-size:22px;color:var(--amber)}
+.top-model-info{flex:1}
+.top-model-sub{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
+.top-model-name{font-size:16px;font-weight:700;color:var(--neon)}
+.top-model-count{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--text)}
+.ageing-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.ageing-item{background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:10px;text-align:center}
+.ageing-item.total{grid-column:1/-1;border-color:var(--neon);background:rgba(163,230,53,.04)}
+.ageing-label{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.ageing-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--text)}
+.lucro-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.lucro-card{background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:12px;text-align:center}
+.lucro-mes{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:600}
+.lucro-val{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700}
+.lucro-pos{color:var(--neon)}.lucro-neg{color:var(--red)}
+.lucro-detail{font-size:9px;color:var(--dim);margin-top:4px;font-family:'JetBrains Mono',monospace}
+.prog-wrap{margin:8px 0}
+.prog-label{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-bottom:4px}
+.prog-bar{height:6px;background:var(--card-border);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--neon);border-radius:3px;transition:width .6s ease}
+.divider{height:1px;background:var(--card-border);margin:14px 0}
+.footer{text-align:center;padding:30px 16px 20px;font-size:9px;color:#333;letter-spacing:2px;text-transform:uppercase}
+.footer a{text-decoration:none}
+.qr-section{margin-top:20px;padding:20px;background:var(--card);border:1px solid var(--card-border);border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.qr-section .qr-title{font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase}
+.qr-section .qr-sub{font-size:11px;color:var(--text);letter-spacing:0;text-transform:none;font-weight:400;margin-top:-4px}
+.qr-section svg{border-radius:8px;background:rgba(0,0,0,.5);padding:10px}
+.qr-section .qr-url{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--neon);letter-spacing:0;text-transform:none;word-break:break-all}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-top">
     <div class="logo">
-      <div class="empresa-nome">
-        <span class="e-pre">Grupo </span><span class="e-accent">Dinisa</span>
-      </div>
+      <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAfQB9ADASIAAhEBAxEB/8QAHQABAQACAwEBAQAAAAAAAAAAAAEHCAIDBgkFBP/EAE4QAQABAgMDCAUIBwYDBwUAAAABAgMEBQYHETEIGCE3VnWTshJBUVVhEyJxdIGRobMUFzZCUpLSFSMyYrHBcqLRFiQlM1NzgoPT4fDx/8QAGwEBAAIDAQEAAAAAAAAAAAAAAAECAwQGBQf/xAA4EQEAAQMABQoEBQQDAQAAAAAAAQIDBAURFBVSEiExMjNBUXGBoRM0seEGImFj0RZCYsEjJJHx/9oADAMBAAIRAxEAPwDTIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//Z" alt="Data Dealer" style="height:28px;width:auto">
+      <span><span class="logo-data">data</span><span class="logo-dealer">dealer</span><sup>&reg;</sup></span>
     </div>
-    <div class="header-date">
-      <div class="live-dot"></div>
-      14/04/2026
-    </div>
+    <div class="header-date"><div class="live-dot"></div>06/abr/2026</div>
   </div>
-  <div class="header-sub">Resumo Executivo — Dados que movem resultados</div>
+  <div class="header-sub">Resumo Executivo &mdash; Dados que movem resultados</div>
   <div class="tabs">
-    <div class="tab active" data-filter="vendas">🚗 Vendas</div>
-    <div class="tab" data-filter="posvendas">🔧 Pós-Vendas</div>
-    <div class="tab" data-filter="backoffice">🏛 Back Office</div>
-    <div class="tab" data-filter="todos">📊 Todos</div>
+    <div class="tab active" data-filter="vendas">&#x1F697; Vendas</div>
+    <div class="tab" data-filter="pos-vendas">&#x1F527; P&oacute;s-Vendas</div>
+    <div class="tab" data-filter="backoffice">&#x1F3DB;&#xFE0F; Back Office</div>
+    <div class="tab" data-filter="todos">&#x1F4CA; Todos</div>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="content">
-
-  <!-- ====== VENDAS ====== -->
-  <div class="section visible" data-section="vendas" data-initial="1">
-
-    
-    <div class="section-label">Faturamento de Veículos — Mar/26</div>
-
-    <div class="hl-card">
-      <div class="hl-label">Faturamento Total Mar/26</div>
-      <div class="hl-value">R$ 42,6M</div>
-      <div class="hl-sub">210 novos · 138 usados · 348 unidades</div>
-    </div>
-
-    <div class="mini-stats">
-      <div class="mini-stat">
-        <div class="mini-stat-label"><i class="fa-solid fa-car" style="color:var(--neon);margin-right:4px"></i> Vol. Novos</div>
-        <div class="mini-stat-val">210</div>
-      </div>
-      <div class="mini-stat">
-        <div class="mini-stat-label"><i class="fa-solid fa-car-side" style="color:var(--amber);margin-right:4px"></i> Vol. Usados</div>
-        <div class="mini-stat-val" style="color:var(--amber)">138</div>
-      </div>
-      <div class="mini-stat">
-        <div class="mini-stat-label">Fat. Novos</div>
-        <div class="mini-stat-val">R$ 32,6M</div>
-      </div>
-      <div class="mini-stat">
-        <div class="mini-stat-label">Fat. Usados</div>
-        <div class="mini-stat-val" style="color:var(--cyan)">R$ 10,0M</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-tag" style="color:var(--neon);margin-right:6px"></i>Margem por Tipo</div>
-      <div class="metric-row">
-        <span class="metric-label">Margem/Unid. Novos</span>
-        <span class="metric-value mv-neon">R$ 155.072</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Margem/Unid. Usados</span>
-        <span class="metric-value mv-amber">R$ 72.388</span>
-      </div>
-    </div>
-
-    <div class="section-label">Evolução Mensal 2026 — Faturamento</div>
-
-    <div class="card">
-      <div class="card-title">Volume e Faturamento por Mês</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Jan/26</span>
-        <span class="metric-value mv-blue">202N · 165U · R$ 44,5M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Fev/26</span>
-        <span class="metric-value mv-blue">120N · 116U · R$ 26,9M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Mar/26</span>
-        <span class="metric-value mv-amber">210N · 138U · R$ 42,6M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Abr/26</span>
-        <span class="metric-value mv-neon">33N · 44U · R$ 9,2M</span>
-      </div>
-      
-    </div>
-
-    <div class="section-label">Performance por Marca — Mar/26</div>
-
-    <div class="marca-grid">
-      
-      <div class="marca-card">
-        <div class="marca-name">BYD</div>
-        <div class="marca-row"><span>Novos</span><span>142</span></div>
-        <div class="marca-row"><span>Usados</span><span>32</span></div>
-        <div class="marca-row"><span>Fat. N</span><span>R$ 22,1M</span></div>
-        <div class="marca-row"><span>Margem/N</span><span style="color:var(--neon)">R$ 155K</span></div>
-      </div>
-      
-      <div class="marca-card">
-        <div class="marca-name">RENA</div>
-        <div class="marca-row"><span>Novos</span><span>35</span></div>
-        <div class="marca-row"><span>Usados</span><span>71</span></div>
-        <div class="marca-row"><span>Fat. N</span><span>R$ 4,4M</span></div>
-        <div class="marca-row"><span>Margem/N</span><span style="color:var(--neon)">R$ 127K</span></div>
-      </div>
-      
-      <div class="marca-card">
-        <div class="marca-name">CHRY</div>
-        <div class="marca-row"><span>Novos</span><span>12</span></div>
-        <div class="marca-row"><span>Usados</span><span>18</span></div>
-        <div class="marca-row"><span>Fat. N</span><span>R$ 2,7M</span></div>
-        <div class="marca-row"><span>Margem/N</span><span style="color:var(--neon)">R$ 225K</span></div>
-      </div>
-      
-      <div class="marca-card">
-        <div class="marca-name">NISS</div>
-        <div class="marca-row"><span>Novos</span><span>16</span></div>
-        <div class="marca-row"><span>Usados</span><span>16</span></div>
-        <div class="marca-row"><span>Fat. N</span><span>R$ 2,6M</span></div>
-        <div class="marca-row"><span>Margem/N</span><span style="color:var(--neon)">R$ 162K</span></div>
-      </div>
-      
-      <div class="marca-card">
-        <div class="marca-name">PEUG</div>
-        <div class="marca-row"><span>Novos</span><span>5</span></div>
-        <div class="marca-row"><span>Usados</span><span>1</span></div>
-        <div class="marca-row"><span>Fat. N</span><span>R$ 765,6K</span></div>
-        <div class="marca-row"><span>Margem/N</span><span style="color:var(--neon)">R$ 153K</span></div>
-      </div>
-      
-    </div>
-
-    
-
-    
-    <div class="section-label">Emplacamentos — 2026 YTD</div>
-
-    <div class="hl-card">
-      <div class="hl-label">Share de Mercado — Grupo 2026</div>
-      <div class="hl-value">2,12<span style="font-size:16px">%</span></div>
-      <div class="hl-sub">532 emplacamentos · Mercado total: 25.127</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-store" style="color:var(--neon);margin-right:6px"></i>Emplacamentos por Loja</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">AMR Veículos</span>
-        <span class="metric-value mv-neon">306</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">DinisaSul 01</span>
-        <span class="metric-value mv-blue">91</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Dinisa Veículos</span>
-        <span class="metric-value mv-blue">70</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Mirae</span>
-        <span class="metric-value mv-amber">45</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">ARP Veículos</span>
-        <span class="metric-value mv-amber">18</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">DinisaSul 02</span>
-        <span class="metric-value mv-blue">2</span>
-      </div>
-      
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-map-marker-alt" style="color:var(--neon);margin-right:6px"></i>Top Municípios</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Niteroi / RJ</span>
-        <span class="metric-value mv-neon">300 <span style="color:var(--dim);font-size:10px">/ 1.581</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Sao Goncalo / RJ</span>
-        <span class="metric-value mv-blue">66 <span style="color:var(--dim);font-size:10px">/ 527</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Marica / RJ</span>
-        <span class="metric-value mv-blue">66 <span style="color:var(--dim);font-size:10px">/ 349</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Rio De Janeiro / RJ</span>
-        <span class="metric-value mv-amber">23 <span style="color:var(--dim);font-size:10px">/ 11.890</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Itaborai / RJ</span>
-        <span class="metric-value mv-amber">15 <span style="color:var(--dim);font-size:10px">/ 125</span></span>
-      </div>
-      
-    </div>
-
-    <div class="card">
-      <div class="card-title">Evolução Mensal — Emplacamentos do Grupo</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Jan/26</span>
-        <span class="metric-value mv-blue">183 <span style="color:var(--dim);font-size:10px">mercado: 7.871</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Fev/26</span>
-        <span class="metric-value mv-blue">123 <span style="color:var(--dim);font-size:10px">mercado: 6.694</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Mar/26</span>
-        <span class="metric-value mv-amber">189 <span style="color:var(--dim);font-size:10px">mercado: 8.346</span></span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Abr/26</span>
-        <span class="metric-value mv-neon">37 <span style="color:var(--dim);font-size:10px">mercado: 2.216</span></span>
-      </div>
-      
-    </div>
-
-    
-
-    
-    <div class="section-label">Estoque de Veículos — Panorama Atual</div>
-
-    <div class="hl-card warn">
-      <div class="hl-label">Custo Total em Estoque</div>
-      <div class="hl-value" style="color:var(--amber)">R$ 57,7M</div>
-      <div class="hl-sub">440 unidades · 316 novos · 124 usados</div>
-    </div>
-
-    <div class="mini-stats">
-      <div class="mini-stat">
-        <div class="mini-stat-label">Média Dias Fábrica</div>
-        <div class="mini-stat-val" style="color:var(--amber)">64,5</div>
-      </div>
-      <div class="mini-stat">
-        <div class="mini-stat-label">Média Dias Entrada</div>
-        <div class="mini-stat-val" style="color:var(--neon)">36,1</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-clock" style="color:var(--amber);margin-right:6px"></i>Ageing Estoque Novos</div>
-      <div class="ageing-grid">
-        <div class="ageing-item">
-          <div class="ageing-label">Até 30 dias</div>
-          <div class="ageing-val neon">123</div>
-        </div>
-        <div class="ageing-item">
-          <div class="ageing-label">31 a 60 dias</div>
-          <div class="ageing-val neon">48</div>
-        </div>
-        <div class="ageing-item warn-item">
-          <div class="ageing-label">61 a 90 dias</div>
-          <div class="ageing-val amber">38</div>
-        </div>
-        <div class="ageing-item danger-item">
-          <div class="ageing-label">91 a 180 dias</div>
-          <div class="ageing-val red">105</div>
-        </div>
-        <div class="ageing-item total">
-          <div class="ageing-label">+180 dias ⚠</div>
-          <div class="ageing-val red">2</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-clock" style="color:var(--blue);margin-right:6px"></i>Ageing Estoque Usados</div>
-      <div class="ageing-grid">
-        <div class="ageing-item">
-          <div class="ageing-label">Até 30 dias</div>
-          <div class="ageing-val neon">78</div>
-        </div>
-        <div class="ageing-item">
-          <div class="ageing-label">31 a 60 dias</div>
-          <div class="ageing-val neon">16</div>
-        </div>
-        <div class="ageing-item warn-item">
-          <div class="ageing-label">61 a 90 dias</div>
-          <div class="ageing-val amber">17</div>
-        </div>
-        <div class="ageing-item danger-item">
-          <div class="ageing-label">91 a 180 dias</div>
-          <div class="ageing-val amber">12</div>
-        </div>
-        <div class="ageing-item total">
-          <div class="ageing-label">+180 dias ⚠</div>
-          <div class="ageing-val red">1</div>
-        </div>
-      </div>
-    </div>
-
-    
-    
-    <div class="card">
-      <div class="card-title">⚠️ Atenção: RENA Usados com Estoque Alto</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">RENA — Usados</span>
-        <span class="metric-value mv-red">69 unid.</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Média de dias</span>
-        <span class="metric-value mv-red">704 dias!</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Custo em estoque</span>
-        <span class="metric-value mv-red">R$ 3,7M</span>
-      </div>
-      
-    </div>
-    
-    
-    
-
+<!-- VENDAS -->
+<div class="section visible" data-section="vendas">
+  <div class="section-label">Faturamento de Ve&iacute;culos &mdash; Mar/26</div>
+  <div class="hl-card">
+    <div class="hl-label">Faturamento Total</div>
+    <div class="hl-value">R$ 13,5<span class="unit">M</span></div>
+    <div class="hl-sub">Novos R$ 12,7M &middot; Usados R$ 791,4K</div>
+  </div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-car" style="color:var(--neon)"></i> Volume Novos</span><span class="metric-value mv-neon">94</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-car-side" style="color:var(--cyan)"></i> Volume Usados</span><span class="metric-value mv-cyan">53</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-coins" style="color:var(--neon)"></i> Margem/Carro Novos</span><span class="metric-value mv-neon">R$ 10.649</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-coins" style="color:var(--cyan)"></i> Margem/Carro Usados</span><span class="metric-value mv-cyan">R$ 5.230</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-clock" style="color:var(--amber)"></i> Dias Estoque Novos</span><span class="metric-value mv-amber">476 dias</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-clock" style="color:var(--blue)"></i> Dias Estoque Usados</span><span class="metric-value mv-blue">117 dias</span></div>
   </div>
 
-  <!-- ====== PÓS-VENDAS ====== -->
-  <div class="section" data-section="posvendas">
-
-    
-    <div class="section-label">Faturamento Pós-Vendas — Jan/26</div>
-
-    <div class="hl-card">
-      <div class="hl-label">Receita Total Pós-Vendas Jan/26</div>
-      <div class="hl-value">R$ 4,8M</div>
-      <div class="hl-sub">Margem: 46,1% · Lucro Bruto: R$ 2,2M</div>
+  <div class="section-label">Performance por Marca &mdash; Mar/26</div>
+  <div class="marca-grid">
+    <div class="marca-card">
+      <div class="marca-name">BYD</div>
+      <div class="marca-row"><span>Vol. Novos</span><span>59</span></div>
+      <div class="marca-row"><span>Vol. Usados</span><span>33</span></div>
+      <div class="marca-row"><span>Fat. Novos</span><span>R$ 7,8M</span></div>
+      <div class="marca-row"><span>Margem/N</span><span>R$ 9.516</span></div>
+      <div class="marca-row"><span>Margem/U</span><span>R$ 5.687</span></div>
+      <div class="marca-row"><span>Dias N</span><span>133</span></div>
     </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--neon);margin-right:6px"></i>Composição da Receita</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Serviços</span>
-        <span class="metric-value mv-neon">R$ 2,6M</span>
-      </div>
-      <div class="prog-wrap">
-        <div class="prog-bar"><div class="prog-fill" style="width:55%"></div></div>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Peças</span>
-        <span class="metric-value mv-blue">R$ 1,5M</span>
-      </div>
-      <div class="prog-wrap">
-        <div class="prog-bar"><div class="prog-fill blue" style="width:32%"></div></div>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Garantia</span>
-        <span class="metric-value mv-amber">R$ 608,6K</span>
-      </div>
-      <div class="prog-wrap">
-        <div class="prog-bar"><div class="prog-fill amber" style="width:13%"></div></div>
-      </div>
-      
+    <div class="marca-card">
+      <div class="marca-name">BMW</div>
+      <div class="marca-row"><span>Vol. Novos</span><span>15</span></div>
+      <div class="marca-row"><span>Vol. Usados</span><span>9</span></div>
+      <div class="marca-row"><span>Fat. Novos</span><span>R$ 2,2M</span></div>
+      <div class="marca-row"><span>Margem/N</span><span>R$ 9.852</span></div>
+      <div class="marca-row"><span>Margem/U</span><span>R$ 2.845</span></div>
+      <div class="marca-row"><span>Dias N</span><span>78</span></div>
     </div>
-
-    <div class="section-label">Evolução Pós-Vendas 2026</div>
-
-    <div class="card">
-      <div class="card-title">Lucro Bruto Mensal</div>
-      <div class="lucro-grid">
-        
-        <div class="lucro-card">
-          <div class="lucro-mes">Jan/26</div>
-          <div class="lucro-val lucro-pos">R$ 2,2M</div>
-        </div>
-        
-        <div class="lucro-card">
-          <div class="lucro-mes">Fev/26</div>
-          <div class="lucro-val lucro-pos">R$ 1,8M</div>
-        </div>
-        
-        <div class="lucro-card">
-          <div class="lucro-mes">Mar/26</div>
-          <div class="lucro-val lucro-pos">R$ 2,2M</div>
-        </div>
-        
-      </div>
-      
-      <div class="metric-row" style="margin-top:4px">
-        <span class="metric-label">Abr/26 (parcial)</span>
-        <span class="metric-value mv-blue">R$ 739,5K</span>
-      </div>
-      
+    <div class="marca-card">
+      <div class="marca-name">RAM</div>
+      <div class="marca-row"><span>Vol. Novos</span><span>10</span></div>
+      <div class="marca-row"><span>Vol. Usados</span><span>9</span></div>
+      <div class="marca-row"><span>Margem/N</span><span>R$ 14.528</span></div>
+      <div class="marca-row"><span>Margem/U</span><span>R$ 4.984</span></div>
+      <div class="marca-row"><span>Dias N</span><span>108</span></div>
     </div>
-
-    <div class="card">
-      <div class="card-title">Receitas Jan/26 por Canal</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Serviços</span>
-        <span class="metric-value mv-neon">R$ 863,9K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Garantia</span>
-        <span class="metric-value mv-amber">R$ 211,4K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Peças</span>
-        <span class="metric-value mv-blue">R$ 578,2K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Lucro Bruto Abr/26</span>
-        <span class="metric-value mv-neon">R$ 739,5K</span>
-      </div>
-      
+    <div class="marca-card">
+      <div class="marca-name">MITS</div>
+      <div class="marca-row"><span>Vol. Novos</span><span>10</span></div>
+      <div class="marca-row"><span>Vol. Usados</span><span>2</span></div>
+      <div class="marca-row"><span>Fat. Novos</span><span>R$ 2,7M</span></div>
+      <div class="marca-row"><span>Margem/N</span><span>R$ 14.647</span></div>
+      <div class="marca-row"><span>Margem/U</span><span>R$ 9.524</span></div>
+      <div class="marca-row"><span>Dias N</span><span style="color:var(--red)">476</span></div>
     </div>
-
-    
-
-    
-    <div class="section-label">Ordens de Serviço — Panorama Geral</div>
-
-    <div class="hl-card warn">
-      <div class="hl-label">OS Abertas</div>
-      <div class="hl-value" style="color:var(--amber)">944</div>
-      <div class="hl-sub">Ticket médio: R$ 864 · OS Fechadas: 6.549</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-clock" style="color:var(--amber);margin-right:6px"></i>Ageing OS Abertas</div>
-      <div class="ageing-grid">
-        <div class="ageing-item">
-          <div class="ageing-label">Até 3 dias</div>
-          <div class="ageing-val neon">150</div>
-        </div>
-        <div class="ageing-item">
-          <div class="ageing-label">4 a 7 dias</div>
-          <div class="ageing-val neon">137</div>
-        </div>
-        <div class="ageing-item warn-item">
-          <div class="ageing-label">8 a 15 dias</div>
-          <div class="ageing-val amber">202</div>
-        </div>
-        <div class="ageing-item warn-item">
-          <div class="ageing-label">16 a 30 dias</div>
-          <div class="ageing-val amber">219</div>
-        </div>
-        <div class="ageing-item total danger-item">
-          <div class="ageing-label">+30 dias ⚠️</div>
-          <div class="ageing-val red">236</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Top Categorias — OS Abertas</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Re-Revisao Entrega</span>
-        <span class="metric-value mv-blue">298</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Gf-Garantia Fabrica</span>
-        <span class="metric-value mv-amber">185 · R$ 1.354/OS</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Ce-Cliente Externo</span>
-        <span class="metric-value mv-neon">87 · R$ 1.687/OS</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Garantia</span>
-        <span class="metric-value mv-amber">77</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Rf-Revisao Fabrica</span>
-        <span class="metric-value mv-neon">43 · R$ 1.198/OS</span>
-      </div>
-      
-    </div>
-
-    
-
-    
-    <div class="section-label">Estoque de Peças</div>
-
-    <div class="hl-card">
-      <div class="hl-label">Estoque Atual de Peças</div>
-      <div class="hl-value">R$ 7,34M</div>
-      <div class="hl-sub">62.978 unidades · Cobertura: 52,2 dias</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-exclamation-triangle" style="color:var(--amber);margin-right:6px"></i>Controle de Estoque</div>
-      <div class="metric-row">
-        <span class="metric-label">Estoque Alvo</span>
-        <span class="metric-value mv-blue">R$ 7,0M · 60.303 un.</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Excesso</span>
-        <span class="metric-value mv-amber">R$ 311,9K · 2.675 un.</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Falta</span>
-        <span class="metric-value mv-neon">R$ 0 · 0 un.</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Obsoleto</span>
-        <span class="metric-value mv-red">R$ 761,3K (10,4%)</span>
-      </div>
-    </div>
-    
-
   </div>
 
-  <!-- ====== BACK OFFICE ====== -->
-  <div class="section" data-section="backoffice">
-
-    
-    <div class="section-label">Análise Contábil — DRE Mar/26</div>
-
-    <div class="hl-card">
-      <div class="hl-label">Receita Bruta Mar/26</div>
-      <div class="hl-value">R$ 46,0M</div>
-      <div class="hl-sub">Lucro Bruto: R$ 3,9M · Margem bruta ~8,4%</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-file-invoice" style="color:var(--neon);margin-right:6px"></i>DRE Detalhado — Mar/26</div>
-      <div class="dre-row">
-        <span class="dre-label">Receita Bruta</span>
-        <span class="dre-val mv-neon">R$ 46,0M</span>
-      </div>
-      <div class="dre-row">
-        <span class="dre-label">Total de Custos</span>
-        <span class="dre-val mv-red">-R$ 41,6M</span>
-      </div>
-      <div class="dre-row">
-        <span class="dre-label">Impostos</span>
-        <span class="dre-val mv-red">-R$ 480,5K</span>
-      </div>
-      <div class="dre-row" style="border-top:1px solid var(--neon-dim);margin-top:4px;padding-top:8px">
-        <span class="dre-label" style="color:var(--text);font-weight:600">Lucro Bruto</span>
-        <span class="dre-val mv-neon">R$ 3,9M</span>
-      </div>
-      <div class="dre-row">
-        <span class="dre-label">Despesas Operacionais</span>
-        <span class="dre-val mv-red">-R$ 6,1M</span>
-      </div>
-      <div class="dre-row">
-        <span class="dre-label">Rendas Operacionais</span>
-        <span class="dre-val mv-neon">+R$ 2,7M</span>
-      </div>
-      <div class="dre-row">
-        <span class="dre-label">Financeiro / Não Oper.</span>
-        <span class="dre-val mv-red">-R$ 601,6K</span>
-      </div>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-title">Despesas Operacionais — Mar/26 (detalhado)</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Pessoal</span>
-        <span class="metric-value mv-red">-R$ 1,5M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Ocupação</span>
-        <span class="metric-value mv-red">-R$ 1,4M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Funcionamento</span>
-        <span class="metric-value mv-red">-R$ 1,3M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Desp. com Vendas</span>
-        <span class="metric-value mv-amber">-R$ 706,5K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Serv. de Terceiros</span>
-        <span class="metric-value mv-amber">-R$ 348,8K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Comissões</span>
-        <span class="metric-value mv-amber">-R$ 340,9K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Benefícios</span>
-        <span class="metric-value mv-amber">-R$ 316,7K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Marketing</span>
-        <span class="metric-value mv-amber">-R$ 162,6K</span>
-      </div>
-      
-    </div>
-    
-
-    
-    <div class="section-label">Histórico DRE 2026 — Jan a Mar</div>
-
-    <div class="lucro-grid">
-      
-      <div class="lucro-card">
-        <div class="lucro-mes">Jan/26</div>
-        <div class="lucro-val" style="color:var(--blue);font-size:11px">LB: R$ 4,1M</div>
-      </div>
-      
-      <div class="lucro-card">
-        <div class="lucro-mes">Fev/26</div>
-        <div class="lucro-val" style="color:var(--amber);font-size:11px">LB: R$ 2,5M</div>
-      </div>
-      
-      <div class="lucro-card">
-        <div class="lucro-mes">Mar/26</div>
-        <div class="lucro-val" style="color:var(--neon);font-size:11px">LB: R$ 3,9M</div>
-      </div>
-      
-    </div>
-    
-
-    
-    <div class="card">
-      <div class="card-title">Desp. Operacionais vs Rendas Operacionais</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Jan/26 — Desp. Op.</span>
-        <span class="metric-value mv-red">-R$ 5,8M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Jan/26 — Rendas Op.</span>
-        <span class="metric-value mv-neon">+R$ 2,7M</span>
-      </div>
-      <div class="divider"></div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Fev/26 — Desp. Op.</span>
-        <span class="metric-value mv-red">-R$ 5,5M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Fev/26 — Rendas Op.</span>
-        <span class="metric-value mv-neon">+R$ 3,3M</span>
-      </div>
-      <div class="divider"></div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Mar/26 — Desp. Op.</span>
-        <span class="metric-value mv-red">-R$ 6,1M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Mar/26 — Rendas Op.</span>
-        <span class="metric-value mv-neon">+R$ 2,7M</span>
-      </div>
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="section-label">Posição Financeira</div>
-
-    <div class="hl-card">
-      <div class="hl-label">Saldo Disponível (Banco + Caixa)</div>
-      <div class="hl-value">R$ 3,34B</div>
-      <div class="hl-sub">Banco: R$ 3,34B · Caixa: R$ 29,5K</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-arrow-down" style="color:var(--neon);margin-right:6px"></i>Contas a Receber</div>
-      <div class="metric-row">
-        <span class="metric-label">A Vencer</span>
-        <span class="metric-value mv-neon">R$ 16,1M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido 1 a 30 dias</span>
-        <span class="metric-value mv-amber">R$ 2,4M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido 31 a 60 dias</span>
-        <span class="metric-value mv-amber">R$ 271,2K</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido 61 a 90 dias</span>
-        <span class="metric-value mv-red">R$ 151,5K</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido +90 dias</span>
-        <span class="metric-value mv-red">R$ 486,4K</span>
-      </div>
-      <div class="divider"></div>
-      <div class="metric-row">
-        <span class="metric-label" style="color:var(--text);font-weight:600">Total CR</span>
-        <span class="metric-value mv-neon">R$ 19,4M</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-arrow-up" style="color:var(--red);margin-right:6px"></i>Contas a Pagar</div>
-      <div class="metric-row">
-        <span class="metric-label">A Vencer</span>
-        <span class="metric-value mv-blue">R$ 66,9M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido 1 a 30 dias</span>
-        <span class="metric-value mv-amber">R$ 52,8M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido 31 a 60 dias</span>
-        <span class="metric-value mv-amber">R$ 41,7M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido 61 a 90 dias</span>
-        <span class="metric-value mv-red">R$ 52,2M</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Vencido +90 dias</span>
-        <span class="metric-value mv-red">R$ 3,2B</span>
-      </div>
-      <div class="divider"></div>
-      <div class="metric-row">
-        <span class="metric-label" style="color:var(--text);font-weight:600">Total CP</span>
-        <span class="metric-value mv-red">R$ 3,4B</span>
-      </div>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-title">Saldos por Tipo de Título</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">CR — Contas a Receber</span>
-        <span class="metric-value mv-neon">R$ 255,1M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">AD — Adiantamentos</span>
-        <span class="metric-value mv-blue">R$ 53,1M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">CT — Contratos</span>
-        <span class="metric-value mv-blue">R$ 35,1M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">CP — Contas a Pagar</span>
-        <span class="metric-value mv-red">-R$ 100,6M</span>
-      </div>
-      
-    </div>
-    
-
-    
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--red);margin-right:6px"></i>CR por Revenda — Vencido vs A Vencer</div>
-      
-      <div class="loja-row">
-        <span class="loja-name">Emp4/Rev1</span>
-        <div class="loja-vals">
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 4,4M</span>
-          <span style="font-family:monospace;font-size:11px;color:var(--amber)">R$ 719K vtd</span>
-        </div>
-      </div>
-      
-      <div class="loja-row">
-        <span class="loja-name">Emp5/Rev1</span>
-        <div class="loja-vals">
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 3,9M</span>
-          <span style="font-family:monospace;font-size:11px;color:var(--red)">R$ 2M vtd</span>
-        </div>
-      </div>
-      
-      <div class="loja-row">
-        <span class="loja-name">Emp3/Rev1</span>
-        <div class="loja-vals">
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 2,8M</span>
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 274K vtd</span>
-        </div>
-      </div>
-      
-      <div class="loja-row">
-        <span class="loja-name">Emp1/Rev1</span>
-        <div class="loja-vals">
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 2,8M</span>
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 154K vtd</span>
-        </div>
-      </div>
-      
-      <div class="loja-row">
-        <span class="loja-name">Emp1/Rev2</span>
-        <div class="loja-vals">
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 1,9M</span>
-          <span style="font-family:monospace;font-size:11px;color:var(--neon)">R$ 151K vtd</span>
-        </div>
-      </div>
-      
-    </div>
-    
-    
-
-    
-    <div class="section-label">DFC — Fluxo de Caixa Mar/2026</div>
-
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-water" style="color:var(--blue);margin-right:6px"></i>Fluxo de Caixa</div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCF — Empréstimos</span>
-        <span class="metric-value mv-red">-R$ 45,0K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCI — CAPEX</span>
-        <span class="metric-value mv-red">-R$ 853,2K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCI — Investimentos</span>
-        <span class="metric-value mv-neon">+R$ 3,2M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCA — Sócios</span>
-        <span class="metric-value mv-neon">+R$ 732,9K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCA — Não Operacional</span>
-        <span class="metric-value mv-neon">+R$ 150,1K</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCO — Capital de Giro</span>
-        <span class="metric-value mv-red">-R$ 3,2M</span>
-      </div>
-      
-      <div class="metric-row">
-        <span class="metric-label">FCO — Resultado Exercício</span>
-        <span class="metric-value mv-red">-R$ 30,4K</span>
-      </div>
-      
-    </div>
-    
-
+  <div class="section-label">Emplacamentos &mdash; 2025</div>
+  <div class="hl-card">
+    <div class="hl-label">Share do Grupo</div>
+    <div class="hl-value">11,1<span class="unit">%</span></div>
+    <div class="hl-sub">3.428 de 30.897 total mercado</div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label"><span>Market Share</span><span style="font-family:'JetBrains Mono',monospace">11,1%</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:11.1%"></div></div>
   </div>
 
-</div><!-- end content -->
+  <div class="section-label">AutoAvaliar</div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-clipboard-check" style="color:var(--neon)"></i> Avalia&ccedil;&otilde;es</span><span class="metric-value mv-neon">12.324</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-handshake" style="color:var(--cyan)"></i> Capturas Utilizados</span><span class="metric-value mv-cyan">1.912</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-percent" style="color:var(--amber)"></i> Taxa de Convers&atilde;o</span><span class="metric-value mv-amber">15,5%</span></div>
+  </div>
+  <div class="top-model-card">
+    <div class="top-model-icon"><i class="fa-solid fa-trophy"></i></div>
+    <div class="top-model-info">
+      <div class="top-model-sub">Modelo Mais Procurado</div>
+      <div class="top-model-name">SONG PO</div>
+    </div>
+    <div class="top-model-count">1.372</div>
+  </div>
+</div>
 
+<!-- POS-VENDAS -->
+<div class="section" data-section="pos-vendas">
+  <div class="section-label">Faturamento P&oacute;s-Vendas &mdash; Jan/26</div>
+  <div class="hl-card">
+    <div class="hl-label">Receita Total</div>
+    <div class="hl-value">R$ 239,5<span class="unit">M</span></div>
+    <div class="hl-sub">Pe&ccedil;as R$ 231,2M &middot; Servi&ccedil;os R$ 8,3M</div>
+  </div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-box-open" style="color:var(--neon)"></i> Faturamento Pe&ccedil;as</span><span class="metric-value mv-neon">R$ 231,2M</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-wrench" style="color:var(--cyan)"></i> Faturamento Servi&ccedil;os</span><span class="metric-value mv-cyan">R$ 8,3M</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-sack-dollar" style="color:var(--neon)"></i> Lucro Bruto</span><span class="metric-value mv-neon">R$ 13,3M</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-chart-line" style="color:var(--amber)"></i> Margem</span><span class="metric-value mv-amber">5,5%</span></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label"><span>Margem Total</span><span style="font-family:'JetBrains Mono',monospace">5,5%</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:5.5%;background:var(--amber)"></div></div>
+  </div>
+
+  <div class="section-label">Ordens de Servi&ccedil;o Abertas</div>
+  <div class="hl-card warn">
+    <div class="hl-label">OS Abertas</div>
+    <div class="hl-value" style="color:var(--amber)">534</div>
+    <div class="hl-sub">Valor total R$ 924,2K</div>
+  </div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-box" style="color:var(--neon)"></i> Valor Pe&ccedil;as</span><span class="metric-value mv-neon">R$ 624,8K</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-screwdriver-wrench" style="color:var(--cyan)"></i> Valor Servi&ccedil;os</span><span class="metric-value mv-cyan">R$ 299,5K</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-receipt" style="color:var(--blue)"></i> Ticket M&eacute;dio</span><span class="metric-value mv-blue">R$ 1.731</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-hourglass-half" style="color:var(--amber)"></i> M&eacute;dia de Dias Aberto</span><span class="metric-value mv-amber">39 dias</span></div>
+  </div>
+
+  <div class="section-label">Estoque de Pe&ccedil;as</div>
+  <div class="hl-card">
+    <div class="hl-label">Estoque Atual</div>
+    <div class="hl-value">R$ 12,6<span class="unit">M</span></div>
+    <div class="hl-sub">155.646 unid. &middot; Cobertura 45 dias</div>
+  </div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-bullseye" style="color:var(--neon)"></i> Estoque Alvo</span><span class="metric-value mv-neon">R$ 13,9M</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-bullseye" style="color:var(--dim)"></i> Alvo Unidades</span><span class="metric-value" style="color:var(--text)">172.136</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-skull-crossbones" style="color:var(--red)"></i> Obsoleto</span><span class="metric-value mv-red">R$ 1,18M</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-percent" style="color:var(--red)"></i> % Obsoleto</span><span class="metric-value mv-red">9,4%</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-arrow-down" style="color:var(--amber)"></i> Falta (R$)</span><span class="metric-value mv-amber">R$ 1,33M</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-arrow-down" style="color:var(--amber)"></i> Falta (Unid.)</span><span class="metric-value mv-amber">16.490</span></div>
+    <div class="metric-row"><span class="metric-label"><i class="fa-solid fa-arrow-up" style="color:var(--blue)"></i> Excesso</span><span class="metric-value mv-blue">R$ 0</span></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label"><span>Obsoleto / Estoque</span><span style="font-family:'JetBrains Mono',monospace">9,4%</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:9.4%;background:var(--red)"></div></div>
+  </div>
+</div>
+
+<!-- BACK OFFICE -->
+<div class="section" data-section="backoffice">
+  <div class="section-label">An&aacute;lise Cont&aacute;bil &mdash; 2025</div>
+  <div class="lucro-grid">
+    <div class="lucro-card"><div class="lucro-mes">Janeiro</div><div class="lucro-val lucro-pos">+R$ 255,5K</div><div class="lucro-detail">LB R$ 1,18M</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Fevereiro</div><div class="lucro-val lucro-neg">-R$ 26,9K</div><div class="lucro-detail">LB R$ 883,2K</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Mar&ccedil;o</div><div class="lucro-val lucro-neg">-R$ 394,2K</div><div class="lucro-detail">LB R$ 609,3K</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Abril</div><div class="lucro-val lucro-neg">-R$ 192,4K</div><div class="lucro-detail">LB R$ 558,9K</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Maio</div><div class="lucro-val lucro-pos">+R$ 362,3K</div><div class="lucro-detail">LB R$ 1,10M</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Junho</div><div class="lucro-val lucro-neg">-R$ 397,6K</div><div class="lucro-detail">LB R$ 533,4K</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Julho</div><div class="lucro-val lucro-pos">+R$ 104,4K</div><div class="lucro-detail">LB R$ 1,02M</div></div>
+    <div class="lucro-card"><div class="lucro-mes">Agosto</div><div class="lucro-val lucro-neg">-R$ 280,6K</div><div class="lucro-detail">LB R$ 115,3K</div></div>
+  </div>
+
+  <div class="section-label">Posi&ccedil;&atilde;o Financeira</div>
+  <div class="hl-card">
+    <div class="hl-label">Saldo Dispon&iacute;vel</div>
+    <div class="hl-value">R$ 48,0<span class="unit">M</span></div>
+    <div class="hl-sub">Banco R$ 48,0M &middot; Caixa R$ 46,3K</div>
+  </div>
+  <div class="divider"></div>
+  <div class="card"><div class="card-title"><i class="fa-solid fa-arrow-down" style="color:var(--neon);margin-right:4px"></i>Contas a Receber &mdash; R$ 166,7M</div></div>
+  <div class="ageing-grid">
+    <div class="ageing-item"><div class="ageing-label">A Vencer</div><div class="ageing-val" style="color:var(--neon)">R$ 7,0M</div></div>
+    <div class="ageing-item"><div class="ageing-label">1&ndash;30 dias</div><div class="ageing-val">R$ 2,5M</div></div>
+    <div class="ageing-item"><div class="ageing-label">31&ndash;60 dias</div><div class="ageing-val" style="color:var(--amber)">R$ 38,8M</div></div>
+    <div class="ageing-item"><div class="ageing-label">61&ndash;90 dias</div><div class="ageing-val" style="color:var(--amber)">R$ 39,8M</div></div>
+    <div class="ageing-item total"><div class="ageing-label">+90 dias</div><div class="ageing-val" style="color:var(--red)">R$ 78,6M</div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="card"><div class="card-title"><i class="fa-solid fa-arrow-up" style="color:var(--red);margin-right:4px"></i>Contas a Pagar &mdash; R$ 307,5M</div></div>
+  <div class="ageing-grid">
+    <div class="ageing-item"><div class="ageing-label">A Vencer</div><div class="ageing-val" style="color:var(--neon)">R$ 130,2M</div></div>
+    <div class="ageing-item"><div class="ageing-label">1&ndash;30 dias</div><div class="ageing-val">R$ 4,7M</div></div>
+    <div class="ageing-item"><div class="ageing-label">31&ndash;60 dias</div><div class="ageing-val" style="color:var(--amber)">R$ 38,2M</div></div>
+    <div class="ageing-item"><div class="ageing-label">61&ndash;90 dias</div><div class="ageing-val" style="color:var(--amber)">R$ 55,1M</div></div>
+    <div class="ageing-item total"><div class="ageing-label">+90 dias</div><div class="ageing-val" style="color:var(--red)">R$ 79,3M</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-social">
-    <a href="https://datadealer.com.br" target="_blank" rel="noopener" aria-label="Site">
-      <i class="fa-solid fa-globe"></i>
-    </a>
-    <a href="https://instagram.com/datadealeroficial" target="_blank" rel="noopener" aria-label="Instagram" class="ig">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-    <a href="https://wa.me/5582988055368" target="_blank" rel="noopener" aria-label="WhatsApp" class="wa">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
+  <div style="margin-bottom:4px">
+    <span style="color:#444">data</span><span style="color:rgba(163,230,53,.3)">dealer</span><sup style="font-size:6px;color:#333">&reg;</sup>
   </div>
-  <div class="footer-qr">
-    <a href="https://datadealeroficial.github.io/resumo_executivo/" target="_blank" rel="noopener" aria-label="Abrir resumo executivo">
-      <div id="footer-qr-code" class="footer-qr-img" aria-label="QR Code para o resumo executivo"></div>
-    </a>
-    <span class="footer-qr-label">Aponte a câmera</span>
+  <div style="margin-bottom:14px">DADOS QUE MOVEM RESULTADOS</div>
+  <div style="border-top:1px solid #1e1e1e;padding-top:14px;font-size:10px;letter-spacing:.5px;color:#555;line-height:2">
+    <div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">ENTRE EM CONTATO</div>
+    <div><a href="https://wa.me/5582988055368" style="color:#555"><i class="fa-brands fa-whatsapp" style="color:var(--neon);margin-right:4px"></i>(82) 98805-5368</a></div>
+    <div><a href="mailto:contato&#64;datadealer.com.br" style="color:#555"><i class="fa-solid fa-envelope" style="color:var(--neon);margin-right:4px"></i>contato&#64;datadealer.com.br</a></div>
+    <div><a href="https://www.datadealer.com.br" target="_blank" style="color:#555"><i class="fa-solid fa-globe" style="color:var(--neon);margin-right:4px"></i>www.datadealer.com.br</a></div>
+    <div><a href="https://www.instagram.com/datadealeroficial" target="_blank" style="color:#555"><i class="fa-brands fa-instagram" style="color:var(--neon);margin-right:4px"></i>@datadealeroficial</a></div>
   </div>
-  <div class="footer-logo">
-    <span style="color:#444">data</span><span style="color:rgba(163,230,53,.3)">dealer</span><sup style="font-size:6px;color:#333">®</sup>
+
+  <div class="qr-section">
+    <div class="qr-title"><i class="fa-solid fa-qrcode" style="color:var(--neon);margin-right:4px"></i> Acesse no celular</div>
+    <div class="qr-sub">Aponte sua c&acirc;mera para o QR Code abaixo</div>
+    <svg width="160" height="160" version="1.1" viewBox="0 0 37 37" xmlns="http://www.w3.org/2000/svg"><path fill="#a3e635" d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM10,2H11V3H10zM12,2H13V3H12zM13,2H14V3H13zM15,2H16V3H15zM16,2H17V3H16zM20,2H21V3H20zM24,2H25V3H24zM28,2H29V3H28zM29,2H30V3H29zM30,2H31V3H30zM31,2H32V3H31zM32,2H33V3H32zM33,2H34V3H33zM34,2H35V3H34zM2,3H3V4H2zM8,3H9V4H8zM11,3H12V4H11zM12,3H13V4H12zM14,3H15V4H14zM19,3H20V4H19zM20,3H21V4H20zM22,3H23V4H22zM28,3H29V4H28zM34,3H35V4H34zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM15,4H16V5H15zM17,4H18V5H17zM19,4H20V5H19zM21,4H22V5H21zM22,4H23V5H22zM23,4H24V5H23zM24,4H25V5H24zM25,4H26V5H25zM28,4H29V5H28zM30,4H31V5H30zM31,4H32V5H31zM32,4H33V5H32zM34,4H35V5H34zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM11,5H12V6H11zM14,5H15V6H14zM21,5H22V6H21zM23,5H24V6H23zM24,5H25V6H24zM26,5H27V6H26zM28,5H29V6H28zM30,5H31V6H30zM31,5H32V6H31zM32,5H33V6H32zM34,5H35V6H34zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM11,6H12V7H11zM12,6H13V7H12zM13,6H14V7H13zM14,6H15V7H14zM17,6H18V7H17zM19,6H20V7H19zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM28,6H29V7H28zM30,6H31V7H30zM31,6H32V7H31zM32,6H33V7H32zM34,6H35V7H34zM2,7H3V8H2zM8,7H9V8H8zM10,7H11V8H10zM12,7H13V8H12zM14,7H15V8H14zM17,7H18V8H17zM19,7H20V8H19zM22,7H23V8H22zM24,7H25V8H24zM26,7H27V8H26zM28,7H29V8H28zM34,7H35V8H34zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM26,8H27V9H26zM28,8H29V9H28zM29,8H30V9H29zM30,8H31V9H30zM31,8H32V9H31zM32,8H33V9H32zM33,8H34V9H33zM34,8H35V9H34zM11,9H12V10H11zM12,9H13V10H12zM14,9H15V10H14zM17,9H18V10H17zM18,9H19V10H18zM20,9H21V10H20zM21,9H22V10H21zM22,9H23V10H22zM24,9H25V10H24zM26,9H27V10H26zM2,10H3V11H2zM4,10H5V11H4zM8,10H9V11H8zM9,10H10V11H9zM11,10H12V11H11zM12,10H13V11H12zM22,10H23V11H22zM25,10H26V11H25zM26,10H27V11H26zM29,10H30V11H29zM32,10H33V11H32zM34,10H35V11H34zM3,11H4V12H3zM6,11H7V12H6zM7,11H8V12H7zM9,11H10V12H9zM10,11H11V12H10zM11,11H12V12H11zM13,11H14V12H13zM15,11H16V12H15zM16,11H17V12H16zM17,11H18V12H17zM18,11H19V12H18zM19,11H20V12H19zM21,11H22V12H21zM22,11H23V12H22zM25,11H26V12H25zM26,11H27V12H26zM28,11H29V12H28zM31,11H32V12H31zM34,11H35V12H34zM2,12H3V13H2zM6,12H7V13H6zM8,12H9V13H8zM9,12H10V13H9zM10,12H11V13H10zM12,12H13V13H12zM13,12H14V13H13zM14,12H15V13H14zM17,12H18V13H17zM21,12H22V13H21zM22,12H23V13H22zM23,12H24V13H23zM25,12H26V13H25zM27,12H28V13H27zM28,12H29V13H28zM31,12H32V13H31zM32,12H33V13H32zM34,12H35V13H34zM2,13H3V14H2zM5,13H6V14H5zM7,13H8V14H7zM11,13H12V14H11zM12,13H13V14H12zM13,13H14V14H13zM14,13H15V14H14zM15,13H16V14H15zM19,13H20V14H19zM21,13H22V14H21zM22,13H23V14H22zM24,13H25V14H24zM27,13H28V14H27zM28,13H29V14H28zM29,13H30V14H29zM30,13H31V14H30zM31,13H32V14H31zM34,13H35V14H34zM2,14H3V15H2zM4,14H5V15H4zM5,14H6V15H5zM6,14H7V15H6zM7,14H8V15H7zM8,14H9V15H8zM9,14H10V15H9zM10,14H11V15H10zM13,14H14V15H13zM15,14H16V15H15zM19,14H20V15H19zM21,14H22V15H21zM22,14H23V15H22zM25,14H26V15H25zM26,14H27V15H26zM28,14H29V15H28zM2,15H3V16H2zM3,15H4V16H3zM5,15H6V16H5zM9,15H10V16H9zM11,15H12V16H11zM13,15H14V16H13zM14,15H15V16H14zM15,15H16V16H15zM19,15H20V16H19zM21,15H22V16H21zM22,15H23V16H22zM25,15H26V16H25zM26,15H27V16H26zM27,15H28V16H27zM28,15H29V16H28zM29,15H30V16H29zM32,15H33V16H32zM33,15H34V16H33zM34,15H35V16H34zM2,16H3V17H2zM3,16H4V17H3zM4,16H5V17H4zM6,16H7V17H6zM8,16H9V17H8zM10,16H11V17H10zM12,16H13V17H12zM13,16H14V17H13zM14,16H15V17H14zM15,16H16V17H15zM17,16H18V17H17zM19,16H20V17H19zM20,16H21V17H20zM21,16H22V17H21zM22,16H23V17H22zM23,16H24V17H23zM24,16H25V17H24zM25,16H26V17H25zM30,16H31V17H30zM32,16H33V17H32zM34,16H35V17H34zM2,17H3V18H2zM5,17H6V18H5zM10,17H11V18H10zM11,17H12V18H11zM16,17H17V18H16zM20,17H21V18H20zM21,17H22V18H21zM22,17H23V18H22zM24,17H25V18H24zM25,17H26V18H25zM26,17H27V18H26zM27,17H28V18H27zM28,17H29V18H28zM29,17H30V18H29zM31,17H32V18H31zM2,18H3V19H2zM5,18H6V19H5zM7,18H8V19H7zM8,18H9V19H8zM11,18H12V19H11zM13,18H14V19H13zM15,18H16V19H15zM17,18H18V19H17zM18,18H19V19H18zM21,18H22V19H21zM22,18H23V19H22zM26,18H27V19H26zM28,18H29V19H28zM29,18H30V19H29zM31,18H32V19H31zM33,18H34V19H33zM3,19H4V20H3zM4,19H5V20H4zM6,19H7V20H6zM10,19H11V20H10zM11,19H12V20H11zM12,19H13V20H12zM14,19H15V20H14zM16,19H17V20H16zM17,19H18V20H17zM18,19H19V20H18zM21,19H22V20H21zM22,19H23V20H22zM25,19H26V20H25zM26,19H27V20H26zM28,19H29V20H28zM31,19H32V20H31zM34,19H35V20H34zM3,20H4V21H3zM4,20H5V21H4zM5,20H6V21H5zM7,20H8V21H7zM8,20H9V21H8zM11,20H12V21H11zM12,20H13V21H12zM13,20H14V21H13zM14,20H15V21H14zM15,20H16V21H15zM16,20H17V21H16zM17,20H18V21H17zM19,20H20V21H19zM20,20H21V21H20zM21,20H22V21H21zM24,20H25V21H24zM25,20H26V21H25zM26,20H27V21H26zM28,20H29V21H28zM29,20H30V21H29zM31,20H32V21H31zM32,20H33V21H32zM33,20H34V21H33zM34,20H35V21H34zM2,21H3V22H2zM9,21H10V22H9zM10,21H11V22H10zM16,21H17V22H16zM17,21H18V22H17zM18,21H19V22H18zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM24,21H25V22H24zM26,21H27V22H26zM27,21H28V22H27zM30,21H31V22H30zM31,21H32V22H31zM34,21H35V22H34zM3,22H4V23H3zM4,22H5V23H4zM6,22H7V23H6zM7,22H8V23H7zM8,22H9V23H8zM9,22H10V23H9zM10,22H11V23H10zM11,22H12V23H11zM12,22H13V23H12zM14,22H15V23H14zM15,22H16V23H15zM16,22H17V23H16zM17,22H18V23H17zM18,22H19V23H18zM19,22H20V23H19zM20,22H21V23H20zM25,22H26V23H25zM28,22H29V23H28zM29,22H30V23H29zM33,22H34V23H33zM34,22H35V23H34zM4,23H5V24H4zM5,23H6V24H5zM9,23H10V24H9zM10,23H11V24H10zM11,23H12V24H11zM12,23H13V24H12zM15,23H16V24H15zM18,23H19V24H18zM20,23H21V24H20zM21,23H22V24H21zM22,23H23V24H22zM23,23H24V24H23zM24,23H25V24H24zM26,23H27V24H26zM28,23H29V24H28zM29,23H30V24H29zM31,23H32V24H31zM32,23H33V24H32zM34,23H35V24H34zM2,24H3V25H2zM3,24H4V25H3zM6,24H7V25H6zM8,24H9V25H8zM11,24H12V25H11zM13,24H14V25H13zM14,24H15V25H14zM15,24H16V25H15zM16,24H17V25H16zM18,24H19V25H18zM19,24H20V25H19zM20,24H21V25H20zM21,24H22V25H21zM23,24H24V25H23zM25,24H26V25H25zM28,24H29V25H28zM29,24H30V25H29zM34,24H35V25H34zM4,25H5V26H4zM9,25H10V26H9zM10,25H11V26H10zM11,25H12V26H11zM16,25H17V26H16zM17,25H18V26H17zM18,25H19V26H18zM20,25H21V26H20zM25,25H26V26H25zM26,25H27V26H26zM33,25H34V26H33zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM7,26H8V27H7zM8,26H9V27H8zM10,26H11V27H10zM13,26H14V27H13zM14,26H15V27H14zM16,26H17V27H16zM18,26H19V27H18zM22,26H23V27H22zM26,26H27V27H26zM27,26H28V27H27zM28,26H29V27H28zM29,26H30V27H29zM30,26H31V27H30zM31,26H32V27H31zM34,26H35V27H34zM10,27H11V28H10zM16,27H17V28H16zM17,27H18V28H17zM18,27H19V28H18zM19,27H20V28H19zM21,27H22V28H21zM22,27H23V28H22zM25,27H26V28H25zM26,27H27V28H26zM30,27H31V28H30zM34,27H35V28H34zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM7,28H8V29H7zM8,28H9V29H8zM10,28H11V29H10zM11,28H12V29H11zM13,28H14V29H13zM14,28H15V29H14zM15,28H16V29H15zM16,28H17V29H16zM17,28H18V29H17zM18,28H19V29H18zM21,28H22V29H21zM22,28H23V29H22zM23,28H24V29H23zM26,28H27V29H26zM28,28H29V29H28zM30,28H31V29H30zM31,28H32V29H31zM32,28H33V29H32zM34,28H35V29H34zM2,29H3V30H2zM8,29H9V30H8zM14,29H15V30H14zM15,29H16V30H15zM17,29H18V30H17zM18,29H19V30H18zM19,29H20V30H19zM21,29H22V30H21zM24,29H25V30H24zM25,29H26V30H25zM26,29H27V30H26zM30,29H31V30H30zM31,29H32V30H31zM33,29H34V30H33zM2,30H3V31H2zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM8,30H9V31H8zM12,30H13V31H12zM13,30H14V31H13zM16,30H17V31H16zM19,30H20V31H19zM21,30H22V31H21zM22,30H23V31H22zM25,30H26V31H25zM26,30H27V31H26zM27,30H28V31H27zM28,30H29V31H28zM29,30H30V31H29zM30,30H31V31H30zM34,30H35V31H34zM2,31H3V32H2zM4,31H5V32H4zM5,31H6V32H5zM6,31H7V32H6zM8,31H9V32H8zM11,31H12V32H11zM12,31H13V32H12zM15,31H16V32H15zM16,31H17V32H16zM19,31H20V32H19zM21,31H22V32H21zM22,31H23V32H22zM24,31H25V32H24zM25,31H26V32H25zM27,31H28V32H27zM29,31H30V32H29zM30,31H31V32H30zM31,31H32V32H31zM32,31H33V32H32zM33,31H34V32H33zM34,31H35V32H34zM2,32H3V33H2zM4,32H5V33H4zM5,32H6V33H5zM6,32H7V33H6zM8,32H9V33H8zM10,32H11V33H10zM11,32H12V33H11zM15,32H16V33H15zM17,32H18V33H17zM19,32H20V33H19zM21,32H22V33H21zM22,32H23V33H22zM23,32H24V33H23zM25,32H26V33H25zM26,32H27V33H26zM27,32H28V33H27zM29,32H30V33H29zM30,32H31V33H30zM33,32H34V33H33zM34,32H35V33H34zM2,33H3V34H2zM8,33H9V34H8zM12,33H13V34H12zM13,33H14V34H13zM14,33H15V34H14zM16,33H17V34H16zM22,33H23V34H22zM24,33H25V34H24zM26,33H27V34H26zM27,33H28V34H27zM28,33H29V34H28zM29,33H30V34H29zM30,33H31V34H30zM31,33H32V34H31zM2,34H3V35H2zM3,34H4V35H3zM4,34H5V35H4zM5,34H6V35H5zM6,34H7V35H6zM7,34H8V35H7zM8,34H9V35H8zM10,34H11V35H10zM11,34H12V35H11zM15,34H16V35H15zM16,34H17V35H16zM17,34H18V35H17zM18,34H19V35H18zM20,34H21V35H20zM21,34H22V35H21zM26,34H27V35H26zM28,34H29V35H28zM29,34H30V35H29zM30,34H31V35H30zM34,34H35V35H34z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg>
+    <div class="qr-url">datadealeroficial.github.io/resumo_executivo</div>
   </div>
-  DADOS QUE MOVEM RESULTADOS
 </footer>
 
+</div>
+
 <script>
-(function () {
-  const tabs = document.querySelectorAll('.tab');
-  const secs = document.querySelectorAll('.section');
-  function aplicarFiltro(f) {
-    secs.forEach(s => {
-      if (f === 'todos' || s.dataset.section === f) {
-        s.classList.add('visible');
-      } else {
-        s.classList.remove('visible');
-      }
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    var f=this.getAttribute('data-filter');
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+    this.classList.add('active');
+    document.querySelectorAll('.section').forEach(function(s){
+      if(f==='todos'){s.classList.add('visible')}
+      else if(s.getAttribute('data-section')===f){s.classList.add('visible')}
+      else{s.classList.remove('visible')}
     });
-  }
-  tabs.forEach(t => t.addEventListener('click', () => {
-    const f = t.dataset.filter;
-    tabs.forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-    aplicarFiltro(f);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }));
-  // Default: ativa a aba marcada como 'active' no HTML (Vendas)
-  const abaAtiva = document.querySelector('.tab.active');
-  aplicarFiltro(abaAtiva ? abaAtiva.dataset.filter : 'vendas');
-})();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-<script>
-(function () {
-  var el = document.getElementById('footer-qr-code');
-  if (!el || typeof QRCode === 'undefined') return;
-  new QRCode(el, {
-    text: 'https://datadealeroficial.github.io/resumo_executivo/',
-    width: 110,
-    height: 110,
-    colorDark: '#000000',
-    colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.M
+    window.scrollTo({top:0,behavior:'smooth'});
   });
-})();
+});
 </script>
 </body>
 </html>
